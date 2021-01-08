@@ -1,8 +1,5 @@
-﻿#include <stdio.h>
-#include <stdio.h>
-#include <ctype.h>
 #include <locale.h>
-#include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 int main(void)
 {
@@ -11,21 +8,23 @@ int main(void)
 
     setlocale(LC_ALL, "");
     printf("Введите строку\n");
-    fgets(str, 256, stdin);
-    printf("Ваша строку\n");
+    gets_s (str);
+    printf("Ваша строка\n");
     puts(str);
-    for (p = str; *p; ++p)
+    for (int i = 0; i < 256; i++)
     {
-        if (isupper(*(unsigned char*)p))
-            *p = tolower(*(unsigned char*)p);
+        if(str[i]>=65 && str[i]<= 90)
+            str[i]=str[i]+32;
     }
     for (int i = 0; i < 256; i++)
     {
-        if (str[i] == '.')
+        if (str[i] == 46)
         {
-            str[i++] = (char)toupper(str[++i]);
+            int k = i + 1;
+            str[k] = str[k] - 32;
         }
     }
+    printf("Изменённая строка\n");
     puts(str);
     return 0;
 }
